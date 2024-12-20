@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { useMemo, useRef } from 'react';
 import { debounce } from 'radash';
 import { useTheme } from 'next-themes';
+import { aiEnhancer } from './extensions/enhancer';
 
 export default function MarkdownCodemirror({
   value,
@@ -31,6 +32,7 @@ export default function MarkdownCodemirror({
     return delay > 0 ? debounce({ delay }, handleChange) : handleChange;
   }, [onChangeDebounceDelay]);
   const { theme } = useTheme();
+
   return (
     <CodeMirror
       value={value}
@@ -47,6 +49,7 @@ export default function MarkdownCodemirror({
         keymap.of(defaultKeymap.concat(indentWithTab)),
         theme === 'dark' ? vscodeDark : vscodeLight,
         loadLanguage('markdown')!,
+        aiEnhancer(),
       ]}
     />
   );

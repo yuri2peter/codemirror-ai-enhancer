@@ -13,4 +13,8 @@
       border-right: none !important;
     }
   }
+  :global(.cm-ai-completion) {
+    color: #666;
+    opacity: 0.8;
+  }
 }
