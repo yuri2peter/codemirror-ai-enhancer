@@ -9,18 +9,20 @@ import { cn } from '@/lib/utils';
 import { useMemo, useRef } from 'react';
 import { debounce } from 'radash';
 import { useTheme } from 'next-themes';
-import { aiEnhancer } from './extensions/enhancer';
+import { aiEnhancer, EnhancerConfig } from './extensions/enhancer';
 
 export default function MarkdownCodemirror({
   value,
   onChange,
   className,
   onChangeDebounceDelay = 0,
+  aiEnhancerConfig,
 }: {
   value: string;
   onChange?: (value: string) => void;
   className?: string;
   onChangeDebounceDelay?: number;
+  aiEnhancerConfig?: EnhancerConfig;
 }) {
   const refOnChange = useRef(onChange);
   refOnChange.current = onChange;
@@ -49,7 +51,7 @@ export default function MarkdownCodemirror({
         keymap.of(defaultKeymap.concat(indentWithTab)),
         theme === 'dark' ? vscodeDark : vscodeLight,
         loadLanguage('markdown')!,
-        aiEnhancer(),
+        aiEnhancerConfig ? aiEnhancer(aiEnhancerConfig) : [],
       ]}
     />
   );
