@@ -1,13 +1,9 @@
 import { WidgetType } from '@codemirror/view';
-import {
-  EditorSelection,
-  EditorState,
-  EditorView,
-  TransactionSpec,
-} from '@uiw/react-codemirror';
+import { EditorView } from '@uiw/react-codemirror';
 import { CompletionState } from './state';
+import { insertCompletionText } from '../utils';
 
-export class CompletionWidget extends WidgetType {
+export class CompletionInlineWidget extends WidgetType {
   suggestion: string;
 
   /**
@@ -41,26 +37,10 @@ export class CompletionWidget extends WidgetType {
       ...insertCompletionText(
         view.state,
         suggestionText,
-        view.state.selection.main.head,
-        view.state.selection.main.head
+        view.state.selection.main.to,
+        view.state.selection.main.to
       ),
     });
     return true;
   }
-}
-
-export function insertCompletionText(
-  state: EditorState,
-  text: string,
-  from: number,
-  to: number
-): TransactionSpec {
-  return {
-    ...state.changeByRange(() => {
-      return {
-        changes: { from: from, to: to, insert: text },
-        range: EditorSelection.cursor(from + text.length),
-      };
-    }),
-  };
 }

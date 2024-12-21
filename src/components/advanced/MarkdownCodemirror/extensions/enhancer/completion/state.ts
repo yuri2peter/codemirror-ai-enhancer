@@ -11,12 +11,12 @@ export const CompletionState = StateField.define<{ suggestion: null | string }>(
       return { suggestion: null };
     },
     update(previousValue, tr) {
-      const inlineSuggestion = tr.effects.find((e) => e.is(CompletionEffect));
+      const completionEffect = tr.effects.find((e) => e.is(CompletionEffect));
       if (tr.state.doc) {
-        if (inlineSuggestion && tr.state.doc === inlineSuggestion.value.doc) {
+        if (completionEffect && tr.state.doc === completionEffect.value.doc) {
           // There is a new selection that has been set via an effect,
           // and it applies to the current document.
-          return { suggestion: inlineSuggestion.value.text };
+          return { suggestion: completionEffect.value.text };
         } else if (!tr.docChanged && !tr.selection) {
           // This transaction is irrelevant to the document state
           // and could be generate by another plugin, so keep
@@ -24,7 +24,7 @@ export const CompletionState = StateField.define<{ suggestion: null | string }>(
           return previousValue;
         }
       }
-      return { suggestion: null };
+      return this.create(tr.state);
     },
   }
 );

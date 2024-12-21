@@ -1,15 +1,14 @@
 import { EditorView, Prec } from '@uiw/react-codemirror';
 import { keymap } from '@uiw/react-codemirror';
 import { CompletionEffect, CompletionState } from './state';
-import { insertCompletionText } from './widget';
+import { insertCompletionText } from '../utils';
 import { generate } from './generate';
 
-export const keymapExt = Prec.highest(
+export const keymapExt = Prec.high(
   keymap.of([
     {
       key: 'Mod-j',
       run: (view: EditorView) => {
-        console.log('aiEnhancer keymap: mod + j');
         generate(view);
         return true;
       },
@@ -17,7 +16,6 @@ export const keymapExt = Prec.highest(
     {
       key: 'Escape',
       run: (view: EditorView) => {
-        console.log('aiEnhancer keymap: escape');
         const suggestionText = view.state.field(CompletionState)?.suggestion;
         // If there is no suggestion, do nothing and let the default keymap handle it
         if (!suggestionText) {
@@ -37,7 +35,6 @@ export const keymapExt = Prec.highest(
     {
       key: 'Tab',
       run: (view: EditorView) => {
-        console.log('aiEnhancer keymap: tab');
         const suggestionText = view.state.field(CompletionState)?.suggestion;
 
         // If there is no suggestion, do nothing and let the default keymap handle it
@@ -49,8 +46,8 @@ export const keymapExt = Prec.highest(
           ...insertCompletionText(
             view.state,
             suggestionText,
-            view.state.selection.main.head,
-            view.state.selection.main.head
+            view.state.selection.main.to,
+            view.state.selection.main.to
           ),
         });
         return true;

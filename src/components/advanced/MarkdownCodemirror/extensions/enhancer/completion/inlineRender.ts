@@ -6,9 +6,9 @@ import {
 } from '@codemirror/view';
 import { CompletionState } from './state';
 import { EditorView } from '@uiw/react-codemirror';
-import { CompletionWidget } from './widget';
+import { CompletionInlineWidget } from './inlineWidget';
 
-export const renderCompletionPlugin = ViewPlugin.fromClass(
+export const renderInlineCompletionPlugin = ViewPlugin.fromClass(
   class Plugin {
     decorations: DecorationSet;
     constructor() {
@@ -33,10 +33,10 @@ export const renderCompletionPlugin = ViewPlugin.fromClass(
 );
 
 function inlineSuggestionDecoration(view: EditorView, suggestionText: string) {
-  const pos = view.state.selection.main.head;
+  const pos = view.state.selection.main.to;
   const widgets = [];
   const w = Decoration.widget({
-    widget: new CompletionWidget(suggestionText),
+    widget: new CompletionInlineWidget(suggestionText),
     side: 1,
   });
   widgets.push(w.range(pos));

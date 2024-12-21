@@ -18,6 +18,9 @@ export function generate(view: EditorView) {
       'Continue writing the text from the current cursor position while maintaining the context and tone of the existing text. Max-Length: 30 words. Could be incomplete.',
   });
   const resHandler = fetchFn(prompt);
+  view.dispatch({
+    effects: [CompletionEffect.of({ text: ' Generating...', doc })],
+  });
   resHandler.onChange((text) => {
     view.dispatch({
       effects: [CompletionEffect.of({ text, doc })],
