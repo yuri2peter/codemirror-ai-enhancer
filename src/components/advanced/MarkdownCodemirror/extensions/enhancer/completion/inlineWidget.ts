@@ -15,8 +15,6 @@ export class CompletionInlineWidget extends WidgetType {
   }
   toDOM(view: EditorView) {
     const span = document.createElement('span');
-    span.style.opacity = '0.4';
-    span.style.cursor = 'pointer';
     span.className = 'cm-enhancer-inline-suggestion';
     span.textContent = this.suggestion;
     span.onclick = (e) => this.accept(e, view);

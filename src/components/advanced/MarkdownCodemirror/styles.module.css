@@ -13,8 +13,19 @@
       border-right: none !important;
     }
   }
-  :global(.cm-ai-completion) {
-    color: #666;
-    opacity: 0.8;
+  :global(.cm-enhancer-inline-suggestion) {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+
+  :global(.cm-enhancer-compose-command) {
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 4px;
+    :global(input) {
+      outline: none;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
   }
 }

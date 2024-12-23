@@ -1,7 +1,6 @@
 import { StateEffect, StateField } from '@codemirror/state';
 
 export type StateValue = {
-  prompt: string;
   text: string;
   dialogOpened: boolean;
 };

@@ -1,35 +1,42 @@
 import { EditorView } from '@uiw/react-codemirror';
 import { enhancerConfigFacet } from '../facet';
 import { ComposeEffect } from './state';
-import { buildInsertPrompt, buildRewritePrompt } from '../promptBuilder';
+import {
+  buildInsertPrompt as defaultBuildInsertPrompt,
+  buildRewritePrompt as defaultBuildRewritePrompt,
+} from '../promptBuilder';
 
 export function generate(view: EditorView, command: string) {
   const { state } = view;
-  const { fetchFn } = view.state.facet(enhancerConfigFacet);
+  const { completion, buildInsertPrompt, buildRewritePrompt } =
+    state.facet(enhancerConfigFacet);
   const { from, to } = state.selection.ranges[0];
   const selectionLength = to - from;
   const text = state.doc.toString();
   const prefix = text.slice(0, to);
   const suffix = text.slice(from);
   const prompt = selectionLength
-    ? buildRewritePrompt({
+    ? (buildRewritePrompt || defaultBuildRewritePrompt)({
         prefix,
         suffix,
         selection: text.slice(from, to),
         command,
       })
-    : buildInsertPrompt({
+    : (buildInsertPrompt || defaultBuildInsertPrompt)({
         prefix,
         suffix,
         command,
       });
-  const resHandler = fetchFn(prompt);
+  const resHandler = completion(prompt);
   view.dispatch({
-    effects: [ComposeEffect.of({ text: ' Generating...' })],
+    effects: [
+      ComposeEffect.of({ text: ' Generating...', dialogOpened: false }),
+    ],
   });
   resHandler.onChange((text) => {
     view.dispatch({
       effects: [ComposeEffect.of({ text })],
     });
+    view.focus();
   });
 }

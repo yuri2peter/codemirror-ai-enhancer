@@ -32,7 +32,7 @@ function aiEnhancerConfig(): EnhancerConfig {
     dangerouslyAllowBrowser: true,
   });
   return {
-    fetchFn: (prompt) => {
+    completion: (prompt) => {
       let str = '';
       let handleChange: (text: string) => void = () => {};
       let handleDone: () => void = () => {};
