@@ -5,9 +5,9 @@ export type StateValue = {
   dialogOpened: boolean;
 };
 
-export const ComposeEffect = StateEffect.define<Partial<StateValue>>();
+export const ComposerEffect = StateEffect.define<Partial<StateValue>>();
 
-export const ComposeState = StateField.define<StateValue>({
+export const ComposerState = StateField.define<StateValue>({
   create() {
     return {
       prompt: '',
@@ -16,13 +16,13 @@ export const ComposeState = StateField.define<StateValue>({
     };
   },
   update(previousValue, tr) {
-    const composeEffect = tr.effects.find((e) => e.is(ComposeEffect));
+    const composerEffect = tr.effects.find((e) => e.is(ComposerEffect));
     if (tr.state.doc) {
-      if (composeEffect) {
-        // There is some changes to the compose state, so update it.
+      if (composerEffect) {
+        // There is some changes to the composer state, so update it.
         return {
           ...previousValue,
-          ...composeEffect.value,
+          ...composerEffect.value,
         };
       } else if (!tr.docChanged && !tr.selection) {
         // This transaction is irrelevant to the document state

@@ -1,6 +1,6 @@
 import { EditorView } from '@uiw/react-codemirror';
 import { enhancerConfigFacet } from '../facet';
-import { ComposeEffect } from './state';
+import { ComposerEffect } from './state';
 import {
   buildInsertPrompt as defaultBuildInsertPrompt,
   buildRewritePrompt as defaultBuildRewritePrompt,
@@ -30,12 +30,12 @@ export function generate(view: EditorView, command: string) {
   const resHandler = completion(prompt);
   view.dispatch({
     effects: [
-      ComposeEffect.of({ text: ' Generating...', dialogOpened: false }),
+      ComposerEffect.of({ text: ' Generating...', dialogOpened: false }),
     ],
   });
   resHandler.onChange((text) => {
     view.dispatch({
-      effects: [ComposeEffect.of({ text })],
+      effects: [ComposerEffect.of({ text })],
     });
     view.focus();
   });

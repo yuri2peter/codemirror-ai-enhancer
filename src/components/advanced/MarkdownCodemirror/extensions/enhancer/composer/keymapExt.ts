@@ -1,6 +1,6 @@
 import { EditorView, Prec } from '@uiw/react-codemirror';
 import { keymap } from '@uiw/react-codemirror';
-import { ComposeEffect, ComposeState } from './state';
+import { ComposerEffect, ComposerState } from './state';
 import { insertCompletionText } from '../utils';
 import { exitCommand } from './utils';
 
@@ -10,7 +10,7 @@ export const keymapExt = Prec.highest(
       key: 'Mod-k',
       run: (view: EditorView) => {
         view.dispatch({
-          effects: [ComposeEffect.of({ dialogOpened: true })],
+          effects: [ComposerEffect.of({ dialogOpened: true, text: '' })],
         });
         return true;
       },
@@ -18,7 +18,7 @@ export const keymapExt = Prec.highest(
     {
       key: 'Escape',
       run: (view: EditorView) => {
-        const state = view.state.field(ComposeState);
+        const state = view.state.field(ComposerState);
         if (state) {
           const { dialogOpened, text } = state;
           if (dialogOpened || !!text) {
@@ -32,7 +32,7 @@ export const keymapExt = Prec.highest(
     {
       key: 'Tab',
       run: (view: EditorView) => {
-        const state = view.state.field(ComposeState);
+        const state = view.state.field(ComposerState);
         if (state) {
           const { dialogOpened, text } = state;
           if (!dialogOpened && !!text) {

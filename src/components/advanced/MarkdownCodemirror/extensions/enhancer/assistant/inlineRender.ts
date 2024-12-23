@@ -4,11 +4,11 @@ import {
   ViewPlugin,
   ViewUpdate,
 } from '@codemirror/view';
-import { ComposeState } from './state';
+import { AssistantState } from './state';
 import { EditorView } from '@uiw/react-codemirror';
-import { ComposeInlineWidget } from './inlineWidget';
+import { AssistantInlineWidget } from './inlineWidget';
 
-export const renderInlineComposePlugin = ViewPlugin.fromClass(
+export const renderAssistantInlinePlugin = ViewPlugin.fromClass(
   class Plugin {
     decorations: DecorationSet;
     constructor() {
@@ -16,12 +16,12 @@ export const renderInlineComposePlugin = ViewPlugin.fromClass(
       this.decorations = Decoration.none;
     }
     update(update: ViewUpdate) {
-      const composeText = update.state.field(ComposeState)?.text;
+      const composeText = update.state.field(AssistantState)?.text;
       if (!composeText) {
         this.decorations = Decoration.none;
         return;
       }
-      this.decorations = inlineComposeDecoration(update.view, composeText);
+      this.decorations = inlineAssistantDecoration(update.view, composeText);
     }
   },
   {
@@ -29,11 +29,11 @@ export const renderInlineComposePlugin = ViewPlugin.fromClass(
   }
 );
 
-function inlineComposeDecoration(view: EditorView, composeText: string) {
+function inlineAssistantDecoration(view: EditorView, composeText: string) {
   const pos = view.state.selection.main.to;
   const widgets = [];
   const w = Decoration.widget({
-    widget: new ComposeInlineWidget(composeText),
+    widget: new AssistantInlineWidget(composeText),
     side: 1,
   });
   widgets.push(w.range(pos));

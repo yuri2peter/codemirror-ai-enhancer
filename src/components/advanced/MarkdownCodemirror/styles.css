@@ -1,0 +1,30 @@
+.cm-editor {
+  background-color: transparent !important;
+  padding: 12px !important;
+  outline: none !important;
+}
+.cm-scroller {
+  font-family: var(--font-geist-sans) var(--font-geist-mono);
+  font-size: 14px;
+
+  .cm-gutters {
+    background-color: transparent !important;
+    border-right: none !important;
+  }
+}
+.cm-enhancer-inline-suggestion {
+  opacity: 0.5;
+}
+.cm-enhancer-inline-answer {
+  color: #94c089;
+  font-style: italic;
+}
+.cm-enhancer-composer-command,
+.cm-enhancer-assistant-command {
+  input {
+    outline: none;
+    background-color: transparent;
+    color: white;
+    width: 100%;
+  }
+}

@@ -1,91 +1,32 @@
-import MarkdownCodemirror from '@/components/advanced/MarkdownCodemirror';
-import { useState } from 'react';
-import exampleText from './exampleText.ts';
-import { Button } from '@/components/ui/button.tsx';
-import { Card } from '@/components/ui/card.tsx';
-import { EnhancerConfig } from '@/components/advanced/MarkdownCodemirror/extensions/enhancer';
-import OpenAI from 'openai';
+import Playground from './Playground.tsx';
 
 export default function Home() {
-  const [value, setValue] = useState(exampleText);
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center">
-      <Card className="space-y-4 p-4 max-w-md w-screen">
-        <div>
-          <Button onClick={() => setValue(exampleText)}>Reset Value</Button>
-        </div>
-        <MarkdownCodemirror
-          value={value}
-          onChange={setValue}
-          className="w-full h-96 overflow-y-auto bg-gray-100"
-          aiEnhancerConfig={aiEnhancerConfig()}
-        />
-      </Card>
+    <div className="w-full max-w-screen-md mx-auto pt-20 pb-10">
+      <div className="prose pb-8 max-w-full">
+        <h1>CodeMirror AI Enhancer</h1>
+        <p>
+          A CodeMirror extension that leverages AI to perform localized text{' '}
+          <b>modifications</b> and <b>continuations</b>.
+        </p>
+        <h2>Features</h2>
+        <ul>
+          <li>Guide AI to edit your content</li>
+          <li>Customizable LLM invocation</li>
+          <li>Customizable styles</li>
+          <li>Shortcut key triggered</li>
+        </ul>
+        <h2>Use Cases</h2>
+        <ul>
+          <li>Auto-completion</li>
+          <li>Grammar and spelling correction</li>
+          <li>Tone adjustment</li>
+          <li>Text length adjustment</li>
+          <li>Answer questions based on the context</li>
+        </ul>
+        <h2>Playground</h2>
+      </div>
+      <Playground />
     </div>
   );
-}
-
-function aiEnhancerConfig(): EnhancerConfig {
-  const openai = new OpenAI({
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-    baseURL: import.meta.env.VITE_OPENAI_BASE_URL || undefined,
-    dangerouslyAllowBrowser: true,
-  });
-  return {
-    completion: (prompt) => {
-      let str = '';
-      let handleChange: (text: string) => void = () => {};
-      let handleDone: () => void = () => {};
-      let handleAbort: () => void = () => {};
-      const onChange = (fn: (text: string) => void) => {
-        handleChange = fn;
-      };
-      const onDone = (fn: () => void) => {
-        handleDone = fn;
-      };
-      const abort = () => {
-        handleAbort();
-      };
-      const controller = new AbortController();
-      const signal = controller.signal;
-
-      openai.chat.completions
-        .create(
-          {
-            model: 'gpt-4o-mini',
-            stream: true,
-            messages: [{ role: 'user', content: prompt }],
-          },
-          { signal }
-        )
-        .then(async (stream) => {
-          for await (const chunk of stream) {
-            const chunkText = chunk.choices[0]?.delta?.content || '';
-            str += chunkText;
-            handleChange(str);
-          }
-        })
-        .catch((error) => {
-          if (error.name === 'AbortError') {
-            console.log('Request was aborted');
-          } else {
-            console.error(error);
-            handleAbort();
-          }
-        })
-        .finally(() => {
-          handleDone();
-        });
-
-      handleAbort = () => {
-        controller.abort();
-      };
-
-      return {
-        onChange,
-        onDone,
-        abort,
-      };
-    },
-  };
 }

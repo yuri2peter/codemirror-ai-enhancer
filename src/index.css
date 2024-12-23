@@ -37,6 +37,26 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    ::-webkit-scrollbar {
+      @apply w-2 h-2 bg-transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      @apply bg-transparent rounded-full;
+    }
+
+    ::-webkit-scrollbar-corner {
+      @apply bg-transparent;
+    }
+
+    :hover::-webkit-scrollbar {
+      @apply bg-gray-300;
+    }
+
+    :hover::-webkit-scrollbar-thumb {
+      @apply bg-gray-500;
+    }
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -71,6 +91,18 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    .prose {
+      @apply prose-invert;
+    }
+
+    :hover::-webkit-scrollbar {
+      @apply bg-gray-700;
+    }
+
+    :hover::-webkit-scrollbar-thumb {
+      @apply bg-gray-500;
+    }
   }
 }
 

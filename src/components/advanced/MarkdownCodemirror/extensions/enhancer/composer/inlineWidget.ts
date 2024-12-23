@@ -1,9 +1,8 @@
 import { WidgetType } from '@codemirror/view';
 import { EditorView } from '@uiw/react-codemirror';
-import { ComposeState } from './state';
 import { insertCompletionText } from '../utils';
 
-export class ComposeInlineWidget extends WidgetType {
+export class ComposerInlineWidget extends WidgetType {
   suggestion: string;
 
   /**
@@ -14,19 +13,18 @@ export class ComposeInlineWidget extends WidgetType {
     this.suggestion = suggestion;
   }
   toDOM(view: EditorView) {
-    const span = document.createElement('span');
-    span.style.opacity = '0.4';
-    span.style.cursor = 'pointer';
-    span.className = 'cm-enhancer-inline-suggestion';
-    span.textContent = this.suggestion;
-    span.onclick = (e) => this.accept(e, view);
-    return span;
+    const textDom = document.createElement('span');
+    textDom.style.cursor = 'pointer';
+    textDom.className = 'cm-enhancer-inline-suggestion';
+    textDom.textContent = this.suggestion;
+    textDom.onclick = (e) => this.accept(e, view);
+    return textDom;
   }
   accept(e: MouseEvent, view: EditorView) {
     e.stopPropagation();
     e.preventDefault();
 
-    const suggestionText = view.state.field(ComposeState)?.text;
+    const suggestionText = this.suggestion;
 
     // If there is no suggestion, do nothing and let the default keymap handle it
     if (!suggestionText) {

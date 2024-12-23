@@ -4,11 +4,11 @@ import {
   ViewPlugin,
   ViewUpdate,
 } from '@codemirror/view';
-import { CompletionState } from './state';
+import { AssistantState } from './state';
 import { EditorView } from '@uiw/react-codemirror';
-import { CompletionInlineWidget } from './inlineWidget';
+import { AssistantCommandWidget } from './commandWidget';
 
-export const renderCompletionInlinePlugin = ViewPlugin.fromClass(
+export const renderAssistantCommandPlugin = ViewPlugin.fromClass(
   class Plugin {
     decorations: DecorationSet;
     constructor() {
@@ -16,15 +16,12 @@ export const renderCompletionInlinePlugin = ViewPlugin.fromClass(
       this.decorations = Decoration.none;
     }
     update(update: ViewUpdate) {
-      const suggestionText = update.state.field(CompletionState)?.suggestion;
-      if (!suggestionText) {
+      const dialogOpened = update.state.field(AssistantState)?.dialogOpened;
+      if (!dialogOpened) {
         this.decorations = Decoration.none;
         return;
       }
-      this.decorations = completionInlineDecoration(
-        update.view,
-        suggestionText
-      );
+      this.decorations = commandAssistantDecoration(update.view);
     }
   },
   {
@@ -32,11 +29,11 @@ export const renderCompletionInlinePlugin = ViewPlugin.fromClass(
   }
 );
 
-function completionInlineDecoration(view: EditorView, suggestionText: string) {
+function commandAssistantDecoration(view: EditorView) {
   const pos = view.state.selection.main.to;
   const widgets = [];
   const w = Decoration.widget({
-    widget: new CompletionInlineWidget(suggestionText),
+    widget: new AssistantCommandWidget(),
     side: 1,
   });
   widgets.push(w.range(pos));

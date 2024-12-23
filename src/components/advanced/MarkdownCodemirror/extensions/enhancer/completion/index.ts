@@ -1,7 +1,7 @@
 import { keymapExt } from './keymapExt';
-import { renderInlineCompletionPlugin } from './inlineRender';
+import { renderCompletionInlinePlugin } from './inlineRender';
 import { CompletionState } from './state';
 
 export function completion() {
-  return [renderInlineCompletionPlugin, keymapExt, CompletionState];
+  return [renderCompletionInlinePlugin, keymapExt, CompletionState];
 }

@@ -3,16 +3,16 @@ import { EditorView } from '@uiw/react-codemirror';
 import { generate } from './generate';
 import { exitCommand } from './utils';
 
-export class ComposeCommandWidget extends WidgetType {
+export class ComposerCommandWidget extends WidgetType {
   constructor() {
     super();
   }
   toDOM(view: EditorView) {
     let prompt = '';
     const dom = document.createElement('div');
-    dom.className = 'cm-enhancer-compose-command';
+    dom.className = 'cm-enhancer-composer-command';
     const input = document.createElement('input');
-    input.placeholder = 'Enter your command';
+    input.placeholder = 'Enter your command here...';
     input.oninput = (e) => {
       const value = (e.target as HTMLInputElement).value;
       prompt = value;
@@ -31,6 +31,10 @@ export class ComposeCommandWidget extends WidgetType {
       }
     };
     dom.appendChild(input);
+    setTimeout(() => {
+      input.focus();
+    }, 0);
+    // Make sure the input is focused after the DOM is updated
     setTimeout(() => {
       input.focus();
     }, 100);
