@@ -12,19 +12,3 @@
     border-right: none !important;
   }
 }
-.cm-enhancer-inline-suggestion {
-  opacity: 0.5;
-}
-.cm-enhancer-inline-answer {
-  color: #94c089;
-  font-style: italic;
-}
-.cm-enhancer-composer-command,
-.cm-enhancer-assistant-command {
-  input {
-    outline: none;
-    background-color: transparent;
-    color: white;
-    width: 100%;
-  }
-}

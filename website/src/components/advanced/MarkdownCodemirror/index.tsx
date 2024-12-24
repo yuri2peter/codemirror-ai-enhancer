@@ -2,7 +2,7 @@ import './styles.css';
 import CodeMirror, { EditorView } from '@uiw/react-codemirror';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { loadLanguage } from '@uiw/codemirror-extensions-langs';
-import { aiEnhancer, EnhancerConfig } from './extensions/enhancer';
+import { aiEnhancer, EnhancerConfig } from '@packages/codemirror-ai-enhancer';
 
 export default function MarkdownCodemirror({
   value,

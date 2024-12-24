@@ -3,7 +3,7 @@ import {
   TextChangeHandler,
   PromptParams,
   EnhancerConfig,
-} from '@/components/advanced/MarkdownCodemirror/extensions/enhancer/defines';
+} from '@packages/codemirror-ai-enhancer';
 
 function handleCompletion(prompt: string, onTextChange: TextChangeHandler) {
   const openai = new OpenAI({
