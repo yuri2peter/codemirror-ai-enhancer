@@ -1,23 +1,18 @@
+export type PromptParams = {
+  prefix: string;
+  suffix: string;
+  selection: string;
+  command: string;
+};
+
+export type TextChangeHandler = (text: string) => void;
+
+export type CompletionParams = PromptParams & {
+  onTextChange: TextChangeHandler;
+};
+
 export type EnhancerConfig = {
-  completion: (prompt: string) => {
-    onChange: (fn: (text: string) => void) => void;
-    onFinish: (fn: () => void) => void;
-  };
-  buildInsertPrompt?: (params: {
-    prefix: string;
-    suffix: string;
-    command: string;
-  }) => string;
-  buildRewritePrompt?: (params: {
-    prefix: string;
-    suffix: string;
-    selection: string;
-    command: string;
-  }) => string;
-  buildAssistantPrompt?: (params: {
-    prefix: string;
-    suffix: string;
-    selection: string;
-    command: string;
-  }) => string;
+  insert: (params: CompletionParams) => void;
+  rewrite: (params: CompletionParams) => void;
+  assist: (params: CompletionParams) => void;
 };
