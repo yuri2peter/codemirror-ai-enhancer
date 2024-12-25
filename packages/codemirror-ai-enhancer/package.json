@@ -20,14 +20,20 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": {
+      "import": "./dist/styles.css",
+      "require": "./dist/styles.css"
+    }
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && npm run copy2website && npm run copyreadme",
-    "copy2website": "cp -R dist ../../website/packages/codemirror-ai-enhancer",
+    "copy2website": "mkdir -p ../../website/packages/codemirror-ai-enhancer && cp -R dist ../../website/packages/codemirror-ai-enhancer && cp package.json ../../website/packages/codemirror-ai-enhancer",
     "copyreadme": "cp ../../README.md .",
     "lint": "eslint .",
     "prepublish": "npm run lint && npm run build",
