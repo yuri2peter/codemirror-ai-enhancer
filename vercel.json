@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "installCommand": "cd packages/codemirror-ai-enhancer && npm ci && npm run build && cd ../../website && npm ci",
+    "buildCommand": "cd website && npm run build",
+    "outputDirectory": "website/.next"
+  }
+}
