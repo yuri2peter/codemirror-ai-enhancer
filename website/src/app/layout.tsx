@@ -30,12 +30,12 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'KnowLink',
   icons: {
     icon: '/images/logo.png',
   },
   description:
-    'KnowLink is an AI-powered web app for organizing your notes and bookmarks.',
+    'A CodeMirror extension that leverages AI to perform localized text modifications and continuations.',
+  keywords: ['CodeMirror', 'AI', 'text modification', 'continuation'],
 };
 
 export default function RootLayout({
