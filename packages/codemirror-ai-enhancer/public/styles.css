@@ -1,0 +1,13 @@
+.cm-enhancer-inline-suggestion {
+  opacity: 0.5;
+}
+.cm-enhancer-inline-answer {
+  opacity: 0.5;
+}
+.cm-enhancer-composer-command input,
+.cm-enhancer-assistant-command input {
+  outline: none;
+  background-color: transparent;
+  opacity: 0.5;
+  width: 100%;
+}

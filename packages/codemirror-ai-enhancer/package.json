@@ -1,0 +1,67 @@
+{
+  "name": "codemirror-ai-enhancer",
+  "description": "A CodeMirror extension that leverages AI to perform localized text modifications and continuations.",
+  "license": "Apache-2.0",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": [
+    "codemirror",
+    "extension",
+    "autocomplete"
+  ],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuri2peter/codemirror-ai-enhancer"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": {
+      "import": "./dist/styles.css",
+      "require": "./dist/styles.css"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && npm run copy2website && npm run copyreadme",
+    "copy2website": "mkdir -p ../../website/packages/codemirror-ai-enhancer && cp -R dist ../../website/packages/codemirror-ai-enhancer && cp package.json ../../website/packages/codemirror-ai-enhancer",
+    "copyreadme": "cp ../../README.md .",
+    "lint": "eslint .",
+    "prepublish": "npm run lint && npm run build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.4.0"
+  },
+  "peerDependencies": {
+    "@codemirror/state": "^6.2.0",
+    "@codemirror/view": "^6.7.2"
+  },
+  "engines": {
+    "node": "*"
+  }
+}

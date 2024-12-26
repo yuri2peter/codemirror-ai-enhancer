@@ -2,7 +2,7 @@
 
 A CodeMirror extension that leverages AI to perform localized text modifications and continuations.
 
-![demo.gif](https://github.com/yuri2peter/codemirror-ai-enhancer/blob/main/demo.gif?raw=true)
+![demo.gif](./demo.gif)
 
 [Demo](https://codemirror-ai-enhancer.yuri2.cn/)
 
