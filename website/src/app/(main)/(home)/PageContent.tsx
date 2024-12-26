@@ -23,12 +23,12 @@ export default function PageContent() {
           <Button
             variant={'outline'}
             onClick={() => {
-              navigator.clipboard.writeText('npm i codemirror-ai-enhancer');
+              navigator.clipboard.writeText('npm i @yuri2/codemirror-ai-enhancer');
               toast.success('Copied to clipboard');
             }}
           >
             <Terminal className="w-4 h-4 mr-2" />
-            npm i codemirror-ai-enhancer
+            npm i @yuri2/codemirror-ai-enhancer
             <Copy className="w-4 h-4 ml-2" />
           </Button>
           <a href="https://github.com/yuri2peter/codemirror-ai-enhancer">

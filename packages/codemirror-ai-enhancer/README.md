@@ -2,9 +2,9 @@
 
 A CodeMirror extension that leverages AI to perform localized text modifications and continuations.
 
-![demo.gif](./demo.gif)
+![demo.gif](https://github.com/yuri2peter/codemirror-ai-enhancer/blob/main/demo.gif?raw=true)
 
-[Demo](https://codemirror-ai-enhancer.yuri2.cn/)
+[Demo](https://codemirror-ai-enhancer.vercel.app)
 
 ## Features
 
@@ -24,15 +24,15 @@ A CodeMirror extension that leverages AI to perform localized text modifications
 ## Installation
 
 ```bash
-npm i codemirror-ai-enhancer
+npm i @yuri2/codemirror-ai-enhancer
 ```
 
 ## Usage
 
 ```tsx
-import "codemirror-ai-enhancer/styles.css";
+import "@yuri2/codemirror-ai-enhancer/styles.css";
 import CodeMirror from "@uiw/react-codemirror";
-import { aiEnhancer } from "codemirror-ai-enhancer";
+import { aiEnhancer } from "@yuri2/codemirror-ai-enhancer";
 import { aiEnhancerConfig } from "./aiEnhancerConfig";
 
 export default function MyCodemirror() {
@@ -45,7 +45,7 @@ See [aiEnhancerConfig.ts](<https://github.com/yuri2peter/codemirror-ai-enhancer/
 ## Styles
 
 ```tsx
-import "codemirror-ai-enhancer/styles.css";
+import "@yuri2/codemirror-ai-enhancer/styles.css";
 ```
 
 Or, you can customize the styles by yourself.

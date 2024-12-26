@@ -4,7 +4,7 @@ import {
   TextChangeHandler,
   PromptParams,
   EnhancerConfig,
-} from 'codemirror-ai-enhancer';
+} from '@yuri2/codemirror-ai-enhancer';
 
 function handleCompletion(prompt: string, onTextChange: TextChangeHandler) {
   fetchEventSource('/api/ai/chat', {

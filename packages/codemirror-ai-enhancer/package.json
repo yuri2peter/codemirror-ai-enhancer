@@ -1,20 +1,27 @@
 {
-  "name": "codemirror-ai-enhancer",
+  "name": "@yuri2/codemirror-ai-enhancer",
   "description": "A CodeMirror extension that leverages AI to perform localized text modifications and continuations.",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "version": "0.1.0",
   "type": "module",
   "keywords": [
     "codemirror",
     "extension",
-    "autocomplete"
+    "autocomplete",
+    "ai",
+    "chat",
+    "compose",
+    "assistant"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yuri2peter/codemirror-ai-enhancer"
+    "url": "git+https://github.com/yuri2peter/codemirror-ai-enhancer.git"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -36,7 +43,6 @@
     "copy2website": "mkdir -p ../../website/packages/codemirror-ai-enhancer && cp -R dist ../../website/packages/codemirror-ai-enhancer && cp package.json ../../website/packages/codemirror-ai-enhancer",
     "copyreadme": "cp ../../README.md .",
     "lint": "eslint .",
-    "prepublish": "npm run lint && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {
