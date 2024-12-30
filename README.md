@@ -84,6 +84,16 @@ npm ci
 npm run dev
 ```
 
+## Changelog
+
+### 1.0.0
+
+- Ensure that the extension prevents `MOD + J/K/L` from propagating.
+
+### 0.1.0
+
+- Initial release
+
 ## Acknowledgements
 
 Inspired by [codemirror-copilot](https://github.com/asadm/codemirror-copilot).

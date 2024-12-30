@@ -7,8 +7,21 @@ import { Copy, Terminal } from 'lucide-react';
 import { toast } from 'sonner';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import Assistant from './components/playgrounds/Assistant';
+import { useEffect } from 'react';
 
 export default function PageContent() {
+  useEffect(() => {
+    const handleDocKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.length === 1) {
+        // MOD + J/K/L will not be captured here because the enhancer extension prevents these events from propagating
+        console.log(`Mod + ${e.key} detected`);
+      }
+    };
+    document.addEventListener('keydown', handleDocKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleDocKeyDown);
+    };
+  }, []);
   return (
     <div className="w-full max-w-screen-sm mx-auto pt-20 pb-10">
       <div className="prose pb-8 max-w-full">
@@ -23,7 +36,9 @@ export default function PageContent() {
           <Button
             variant={'outline'}
             onClick={() => {
-              navigator.clipboard.writeText('npm i @yuri2/codemirror-ai-enhancer');
+              navigator.clipboard.writeText(
+                'npm i @yuri2/codemirror-ai-enhancer'
+              );
               toast.success('Copied to clipboard');
             }}
           >

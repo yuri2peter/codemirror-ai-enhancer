@@ -2,7 +2,7 @@
   "name": "@yuri2/codemirror-ai-enhancer",
   "description": "A CodeMirror extension that leverages AI to perform localized text modifications and continuations.",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "keywords": [
     "codemirror",
