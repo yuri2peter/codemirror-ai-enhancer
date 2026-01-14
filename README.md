@@ -86,6 +86,12 @@ npm run dev
 
 ## Changelog
 
+### 1.1.0
+
+- Removed unnecessary dependencies(React 18) in the library.
+- Applied patch to fix the "react2shell" vulnerablility in the demo website.
+- Some other minor changes in the demo website.
+
 ### 1.0.0
 
 - Ensure that the extension prevents `MOD + J/K/L` from propagating.

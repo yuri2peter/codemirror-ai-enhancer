@@ -1,21 +1,28 @@
-import { fetchEventSource } from '@/lib/fetchEventSource';
+import fetchEventSource from "@/lib/fetch-event-source";
 import { toast } from 'sonner';
 import {
   TextChangeHandler,
   PromptParams,
   EnhancerConfig,
 } from '@yuri2/codemirror-ai-enhancer';
+import { z } from "zod";
 
 function handleCompletion(prompt: string, onTextChange: TextChangeHandler) {
+  let message = "";
   fetchEventSource('/api/ai/chat', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ prompt, stream: true }),
-    onmessage: (event) => {
-      const data = JSON.parse(event.data);
-      onTextChange(data.completeText);
+    body: JSON.stringify({ prompt }),
+    onmessage: (e) => {
+      const { delta } = z
+        .object({
+          delta: z.string(),
+        })
+        .parse(e.data);
+      message += delta;
+      onTextChange(message);
     },
   }).catch(() => {
     toast.error('Failed to connect to AI, please try again later.');
